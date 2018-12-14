@@ -39,8 +39,8 @@ class Network(object):
             training_data[k:k+mini_batch_size]
                 for k in xrange(0, n, mini_batch_size)] #mengelompokkan data menjadi bbrp bagian dengan jumlah tertentu
             for mini_batch in mini_batches: #dapetin sebagian data utk di training
-      				# print(len(mini_batch))
-      				self.update_mini_batch(mini_batch,eta)
+  				# print(len(mini_batch))
+  				self.update_mini_batch(mini_batch,eta)
             if test_data: 
                 print 'Epoch {0}: {1}/{2}'.format(j,self.evaluate(test_data),n_test)
             else:
@@ -54,7 +54,7 @@ class Network(object):
         nabla_b = [np.zeros(b.shape) for b in self.biases]
         nabla_w = [np.zeros(w.shape) for w in self.weights]
 
-        for x, y in mini_batch: #x input, y output
+        for x, y in mini_batch:
             delta_nabla_b, delta_nabla_w = self.backprop(x, y)
             nabla_b = [nb+dnb for nb, dnb in zip(nabla_b, delta_nabla_b)] #imagine demon chapter 2
             nabla_w = [nw+dnw for nw, dnw in zip(nabla_w, delta_nabla_w)] #imagine demon chapter 2
@@ -69,8 +69,8 @@ class Network(object):
         # gradient for the cost function C_x.  ``nabla_b`` and
         # ``nabla_w`` are layer-by-layer lists of numpy arrays, similar
         # to ``self.biases`` and ``self.weights``."""
-  		nabla_b = [np.zeros(b.shape) for b in self.biases] #initialize space
-  		nabla_w = [np.zeros(w.shape) for w in self.weights] #initialize space
+  		nabla_b = [np.zeros(b.shape) for b in self.biases]
+  		nabla_w = [np.zeros(w.shape) for w in self.weights]
           # feedforward
   		activation = x
   		# print(len(x))
@@ -85,7 +85,7 @@ class Network(object):
   			# print('sum')
   			# print(np.dot(w, activation) + b)
   			# z = []
-  			z = np.dot(w, activation) + b #nilai output
+  			z = np.dot(w, activation) + b
   			zs.append(z)
   			activation = sigmoid(z)
   			activations.append(activation)
@@ -132,5 +132,5 @@ import mnist_loader
 
 training_data,validation_data, test_data = mnist_loader.load_data_wrapper()
 
-net = Network([784,30,10])
-net.SGD(training_data,5,5,2.5, test_data=test_data)
+net = Network([784,100,10])
+net.SGD(training_data,30,10,2.5, test_data=test_data)

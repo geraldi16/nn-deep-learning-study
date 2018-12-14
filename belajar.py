@@ -89,6 +89,7 @@ import numpy as np
 # print(np_weight)
 
 numarr = [1,2,3,4]
+print(numarr[-2])
 print(numarr[1:])
 print(numarr[:-1])
 
