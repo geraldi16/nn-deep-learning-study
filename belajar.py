@@ -88,36 +88,67 @@ import numpy as np
 # print(type(np_height))
 # print(np_weight)
 
-numarr = [1,2,3,4]
-print(numarr[-2])
-print(numarr[1:])
-print(numarr[:-1])
+# numarr = [1,2,3,4]
+# print(numarr[-2])
+# print(numarr[1:])
+# print(numarr[:-1])
 
-numberList = [1,2,3]
-strList = ['one', 'two', 'three']
+# numberList = [1,2,3]
+# strList = ['one', 'two', 'three']
 
-# No iterables are passed
-result = zip()
+# # No iterables are passed
+# result = zip()
 
-# Converting itertor to list
-# resultList = list(result)
-# print(resultList)
+# # Converting itertor to list
+# # resultList = list(result)
+# # print(resultList)
 
-# Two iterables are passed
-# result = zip(numberList, strList)
-result = zip(numarr[:-1],numarr[1:])
+# # Two iterables are passed
+# # result = zip(numberList, strList)
+# result = zip(numarr[:-1],numarr[1:])
 
-# Converting itertor to set
-resultSet = set(result)
-print(resultSet)
+# # Converting itertor to set
+# resultSet = set(result)
+# print(resultSet)
 
-for x, y in zip(numarr[:-1],numarr[1:]):
-	print('%f,%f'%(x,y))
+# for x, y in zip(numarr[:-1],numarr[1:]):
+# 	print('%f,%f'%(x,y))
 
-weights = [np.random.randn(y, x) for x, y in zip(numarr[:-1],numarr[1:])]
-print(weights)
-print(np.random.randn(2,1))
+# weights = [np.random.randn(y, x) for x, y in zip(numarr[:-1],numarr[1:])]
+# print(weights)
+# print(np.random.randn(2,1))
 
-lista =[1,2]
-listb = [3,4]
-print(lista+listb)
+# lista =[1,2]
+# listb = [3,4]
+# print(lista+listb)
+
+# import matplotlib.pyplot as plt
+# # plot a line, implicitly creating a subplot(111)
+# plt.plot([1,2,3])
+# # now create a subplot which represents the top plot of a grid
+# # with 2 rows and 1 column. Since this subplot will overlap the
+# # first, the plot
+#  #(and its axes) previously created, will be removed
+# plt.subplot(441)
+# plt.plot([1,2,3],[4,5,6])
+# plt.grid(False)
+# plt.subplot(5,5,20)
+# plt.plot([1,2,3],[4,5,6])
+# plt.show()
+
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+
+model = keras.Sequential()
+model.add(keras.layers.Embedding(1000, 64, input_length=10))
+# the model will take as input an integer matrix of size (batch, input_length).
+# the largest integer (i.e. word index) in the input should be
+# no larger than 999 (vocabulary size).
+# now model.output_shape == (None, 10, 64), where None is the batch dimension.
+
+input_array = np.random.randint(1000, size=(32, 10))
+
+model.compile('rmsprop', 'mse')
+output_array = model.predict(input_array)
+# assert output_array.shape == (32, 10, 64)
